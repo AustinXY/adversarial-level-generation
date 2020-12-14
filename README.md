@@ -1,4 +1,4 @@
-## Requirements
+## Dependencies
 gym >= 0.2.3<br>
 tqdm >= 4.32.1<br>
 torch >= 1.7.1<br>
