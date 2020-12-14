@@ -1,12 +1,14 @@
-## Dependencies
-gym >= 0.2.3<br>
-tqdm >= 4.32.1<br>
-torch >= 1.7.1<br>
-numpy >= 1.14.1<br>
+## Requirements
 python >=  3.6.8<br>
+
+gym >= 0.2.3<br>
+torch >= 1.7.1<br>
+tqdm >= 4.32.1<br>
+numpy >= 1.14.1<br>
 IPython >= 6.4.0<br>
 imageio >= 2.3.0<br>
 stable_baselines3 >= 0.10.0<br>
+(dependencies will be automatically installed using the installation instruction)
 
 ## Installation
 ```bash
