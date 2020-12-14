@@ -12,7 +12,7 @@ setup(
       description='ALG environment for OpenAI Gym',
       long_description=long_description,
       long_description_content_type="text/markdown",
-      url="https://github.com/mpSchrader/gym-sokoban",
+      url="https://github.com/AustinXY/adversarial-level-generation",
       install_requires=['gym>=0.2.3', 'numpy>=1.14.1', 'tqdm>=4.32.1',
                         'imageio>=2.3.0', 'requests>=2.22.0', 'stable_baselines3>=0.10.0', 'IPython>=6.4.0', 'torch>=1.7.1'],
       packages=find_packages(),
