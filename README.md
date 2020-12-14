@@ -19,10 +19,15 @@ pip install -e .
 
 ## Directory structure
 ```
-training_scripts  contains scripts for trainig Sokoban agent and ALG.
-demo_checkpoints  contains checkpoints for running the demo.
-demo              contains the demo jupyter notebook and demo utilities
-  |_ temp         contains intermediate gifs to display in notebook
-envs              contains gym environments, demo wrappers, and relative utilities
-  |_ surface      contains tile source images for human readable level display
+demo                  contains the demo jupyter notebook and demo utilities
+  |_ temp             contains intermediate gifs to display in notebook
+envs                  contains gym environments, demo wrappers, and relative utilities
+  |_ surface          contains tile source images for human readable level display
+training_scripts      contains scripts for trainig Sokoban agent and ALG.
+demo_checkpoints      contains checkpoints for running the demo.
+  |_ agent_v1b_0.zip  Sokoban agent checkpoint, trained for ~1e6 steps
+  |_ agent_v1b_1.zip  Sokoban agent checkpoint, trained for ~1e7 steps
+  |_ alg_v1b_v0.zip   ALG checkpoint, trained for ~1e7 steps
+  |_ alg_v1b_v1.zip   ALG checkpoint, trained for ~1e7 steps
+  |_ alg_v1b_v2.zip   ALG checkpoint, trained for ~1e7 steps
 ```
