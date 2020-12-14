@@ -23,10 +23,12 @@ class ALGEnv(gym.Env):
                  num_boxes=4,
                  reset=True,
                  log_train_info=True,
+                 log_interval=1000,
                  alg_version=0,
                  train_mode='cnn',
                  agent_lb_path=None,
-                 agent_ub_path=None):
+                 agent_ub_path=None,
+                 init_probs=[0.5,0.5,0.5]):
 
         assert train_mode in TRAIN_MODES
         self.train_mode = train_mode
@@ -54,9 +56,9 @@ class ALGEnv(gym.Env):
 
         # Training hyperperams
         self.max_prefer_subs = dim_room[0] * dim_room[1] // 2
-        self.place_target_prob = 0.0
-        self.place_box_prob = 0.0
-        self.place_player_prob = 0.0
+        self.place_target_prob = init_probs[0]
+        self.place_box_prob = init_probs[1]
+        self.place_player_prob = init_probs[2]
 
         # Log info
         self.start_time = time.time()
@@ -67,7 +69,7 @@ class ALGEnv(gym.Env):
         self.total_reward_per_log_interval = 0
         self.total_steps_per_log_interval = 0
         self.total_subs_per_log_interval = 0
-        self.log_interval = 1000
+        self.log_interval = log_interval
         self.reseted = False
         self.train_counter = 0
 
@@ -128,7 +130,7 @@ class ALGEnv(gym.Env):
                 room[x, y] = 4
 
         for _ in range(self.num_players):
-            if np.random.rand(1) < self.place_box_prob:
+            if np.random.rand(1) < self.place_player_prob:
                 x, y = np.random.randint(1, self.dim_room[0]-1, size=2)
                 room[x, y] = 5
 
