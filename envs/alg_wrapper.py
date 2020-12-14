@@ -58,9 +58,10 @@ class ALGDemoWrapper(gym.Wrapper):
                 im_name = '{}/alg_episode_v{}.gif'.format(
                     self.save_dir, self.version)
                 imageio.mimsave(im_name, images, 'GIF', fps=2)
-                return True
+                print(attempt)
+                return True, obs
 
             attempt += 1
             if attempt >= self.max_attempt:
                 print('Time out. Wasn\'t able to generate good map.')
-                return False
+                return False, None
