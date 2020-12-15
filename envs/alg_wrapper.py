@@ -58,7 +58,6 @@ class ALGDemoWrapper(gym.Wrapper):
                 im_name = '{}/alg_episode_v{}.gif'.format(
                     self.save_dir, self.version)
                 imageio.mimsave(im_name, images, 'GIF', fps=2)
-                print(attempt)
                 return True, obs
 
             attempt += 1
