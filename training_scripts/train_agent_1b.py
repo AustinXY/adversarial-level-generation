@@ -34,7 +34,7 @@ def make_env(rank, seed=0):
 def main():
     num_cpu = 24
     load_version = ''
-    save_version = '1b_8'
+    save_version = '1b_7'
     load_dir = '../demo_checkpoints'
     save_dir = '../models'
     timesteps_per_checkpoint = int(1e6)
