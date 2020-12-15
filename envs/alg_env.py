@@ -22,7 +22,6 @@ class ALGEnv(gym.Env):
                  dim_room=(10, 10),
                  num_boxes=4,
                  reset=True,
-                 log_train_info=True,
                  log_interval=1000,
                  alg_version=0,
                  train_mode='cnn',
@@ -32,7 +31,10 @@ class ALGEnv(gym.Env):
 
         assert train_mode in TRAIN_MODES
         self.train_mode = train_mode
-        self.log_train_info = log_train_info
+        if log_interval > 0:
+            self.log_train_info = True
+        else:
+            self.log_train_info = False
 
         # 0: basic playable map
         # 1: playble map
@@ -109,8 +111,8 @@ class ALGEnv(gym.Env):
         self.action_space = MultiDiscrete([dim_room[0], dim_room[1], 5])
 
         if train_mode == 'cnn':
-            scale = 16
-            screen_height, screen_width = (dim_room[0] * scale, dim_room[1] * scale)
+            self.scale = 6
+            screen_height, screen_width = (dim_room[0] * self.scale, dim_room[1] * self.scale)
             self.observation_space = Box(low=0, high=255, shape=(screen_height, screen_width, 3), dtype=np.uint8)
         else:
             self.observation_space = Box(low=0, high=6, shape=(dim_room[0], dim_room[1]), dtype=np.uint8)
@@ -151,7 +153,7 @@ class ALGEnv(gym.Env):
         self.reseted = True
 
         if self.train_mode == 'cnn':
-            starting_observation = self.render('rgb_array')
+            starting_observation = self.render('tiny_rgb_array', scale=self.scale)
         else:
             starting_observation = self.render('np_array')
         return starting_observation
@@ -320,7 +322,7 @@ class ALGEnv(gym.Env):
 
         # Convert the observation to RGB frame
         if self.train_mode == 'cnn':
-            observation = self.render(mode='rgb_array')
+            observation = self.render(mode='tiny_rgb_array', scale=self.scale)
         else:
             observation = self.render(mode='np_array')
 
