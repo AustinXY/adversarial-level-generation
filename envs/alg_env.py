@@ -299,6 +299,8 @@ class ALGEnv(gym.Env):
         # finished generation
         else:
             done = True
+
+        if done:
             _train_result = -1  # not used for training
             _fail_type = -1  # not failed
             if (self.placed_player != self.num_players or
