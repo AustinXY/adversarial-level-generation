@@ -15,7 +15,7 @@ def make_env(rank, seed=0):
     num_boxes = 1
     alg_version = 0
     dim_room = (7, 7)
-    train_mode = 'mlp'
+    train_mode = 'cnn'
     agent_lb_path = None
     agent_ub_path = None
 
@@ -37,7 +37,7 @@ def make_env(rank, seed=0):
 
 def main():
     num_cpu = 24
-    load_version = '1b_v0'
+    load_version = ''
     save_version = '1b_v0'
     save_dir = '../models'
     load_dir = '../demo_checkpoints'
@@ -52,14 +52,15 @@ def main():
     alg_env = SubprocVecEnv([make_env(i) for i in range(num_cpu)])
     print('created alg env')
 
+    train_policy = 'CnnPolicy'
     load_path = '{}/alg_v{}.zip'.format(load_dir, load_version)
     if os.path.exists(load_path):
-        alg = PPO("MlpPolicy", alg_env, verbose=0)
+        alg = PPO(train_policy, alg_env, verbose=0)
         alg.set_parameters(load_path, exact_match=True)
         # alg = PPO.load(load_path, env=alg_env)
         print('loaded alg checkpoint' + load_path)
     else:
-        alg = PPO("MlpPolicy", alg_env, verbose=0)
+        alg = PPO(train_policy, alg_env, verbose=0)
         print('created alg model')
 
     save_path = '{}/alg_v{}.zip'.format(save_dir, save_version)

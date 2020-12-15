@@ -70,8 +70,9 @@ class SokobanEnv(gym.Env):
         self.max_steps = max_steps
         self.action_space = Discrete(len(ACTION_LOOKUP))
         if train_mode == 'cnn':
-            scale = 16
-            screen_height, screen_width = (dim_room[0] * scale, dim_room[1] * scale)
+            self.scale = 6
+            screen_height, screen_width = (
+                dim_room[0] * self.scale, dim_room[1] * self.scale)
             self.observation_space = Box(low=0, high=255, shape=(screen_height, screen_width, 3), dtype=np.uint8)
         else:
             self.observation_space = Box(low=0, high=6, shape=(dim_room[0], dim_room[1]), dtype=np.uint8)
@@ -119,7 +120,7 @@ class SokobanEnv(gym.Env):
         self.boxes_on_target = 0
 
         if self.train_mode == 'cnn':
-            starting_observation = self.render('tiny_rgb_array')
+            starting_observation = self.render('tiny_rgb_array', scale=self.scale)
         else:
             starting_observation = self.render('np_array')
         return starting_observation
@@ -155,7 +156,7 @@ class SokobanEnv(gym.Env):
 
         # Convert the observation to RGB frame
         if self.train_mode == 'cnn':
-            observation = self.render(mode='tiny_rgb_array')
+            observation = self.render(mode='tiny_rgb_array', scale=self.scale)
         else:
             observation = self.render(mode='np_array')
 

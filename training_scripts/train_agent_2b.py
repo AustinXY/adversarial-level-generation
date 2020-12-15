@@ -6,10 +6,10 @@ from stable_baselines3.common.utils import set_random_seed
 import os
 import os.path
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 def make_env(rank, seed=0):
-    num_boxes = 1
+    num_boxes = 2
     dim_room = (7, 7)
     train_mode = 'cnn'
     max_steps = 20
