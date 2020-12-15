@@ -27,7 +27,7 @@ class ALGEnv(gym.Env):
                  train_mode='cnn',
                  agent_lb_path=None,
                  agent_ub_path=None,
-                 init_probs=[0.5,0.5,0.5]):
+                 init_probs=[0.5, 0.5, 0.5]):
 
         assert train_mode in TRAIN_MODES
         self.train_mode = train_mode
@@ -353,7 +353,7 @@ class ALGEnv(gym.Env):
             #     print('*********************************************')
                 # self.sample_map = False
 
-            if self.train_counter % self.log_interval == 0 and self.log_train_info:
+            if self.log_train_info and self.train_counter % self.log_interval == 0:
                 end_time = time.time()
                 duration = end_time - self.start_time
                 avg_reward = self.total_reward_per_log_interval / self.log_interval
