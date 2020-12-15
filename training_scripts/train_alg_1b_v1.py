@@ -5,7 +5,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 import os
 import os.path
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 # env_li = [lambda: ALGEnv(dim_room=dim_room, num_boxes=num_boxes, train_mode=train_mode, alg_version=alg_version, agent_lb_path=None, agent_ub_path=None)]
 # alg_env = DummyVecEnv(env_li)
@@ -17,7 +17,7 @@ def make_env(rank, seed=0):
     dim_room = (7, 7)
     train_mode = 'mlp'
     agent_lb_path = None
-    agent_ub_path = 'model/agent_v1b_0.zip'
+    agent_ub_path = '../demo_checkpoints/agent_v1b_2.zip'
 
     """
     Utility function for multiprocessed env.
@@ -36,7 +36,7 @@ def make_env(rank, seed=0):
     return _init
 
 def main():
-    num_cpu = 1
+    num_cpu = 9
     load_version = '1b_v1'
     save_version = '1b_v1'
     save_dir = '../models'

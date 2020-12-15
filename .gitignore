@@ -1,9 +1,2 @@
 *.egg-info
 *.pyc
-.idea
-/logs
-/notebooks
-*~
-.sokoban_cache/
-dist/
-build/

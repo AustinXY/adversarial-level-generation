@@ -54,9 +54,9 @@ class ALGEnv(gym.Env):
 
         # Training hyperperams
         self.max_prefer_subs = dim_room[0] * dim_room[1] // 2
-        self.place_target_prob = 0.0
-        self.place_box_prob = 0.0
-        self.place_player_prob = 0.0
+        self.place_target_prob = 0.5
+        self.place_box_prob = 0.5
+        self.place_player_prob = 0.5
 
         # Log info
         self.start_time = time.time()

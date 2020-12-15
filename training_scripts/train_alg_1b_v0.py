@@ -5,7 +5,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 import os
 import os.path
-# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 # env_li = [lambda: ALGEnv(dim_room=dim_room, num_boxes=num_boxes, train_mode=train_mode, alg_version=alg_version, agent_lb_path=None, agent_ub_path=None)]
 # alg_env = DummyVecEnv(env_li)
@@ -36,7 +36,7 @@ def make_env(rank, seed=0):
     return _init
 
 def main():
-    num_cpu = 1
+    num_cpu = 24
     load_version = '1b_v0'
     save_version = '1b_v0'
     save_dir = '../models'
