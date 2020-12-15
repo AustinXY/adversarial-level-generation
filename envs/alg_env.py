@@ -22,17 +22,19 @@ class ALGEnv(gym.Env):
                  dim_room=(10, 10),
                  num_boxes=4,
                  reset=True,
-                 log_train_info=True,
                  log_interval=1000,
                  alg_version=0,
                  train_mode='cnn',
                  agent_lb_path=None,
                  agent_ub_path=None,
-                 init_probs=[0.5,0.5,0.5]):
+                 init_probs=[0.5, 0.5, 0.5]):
 
         assert train_mode in TRAIN_MODES
         self.train_mode = train_mode
-        self.log_train_info = log_train_info
+        if log_interval > 0:
+            self.log_train_info = True
+        else:
+            self.log_train_info = False
 
         # 0: basic playable map
         # 1: playble map
@@ -351,7 +353,7 @@ class ALGEnv(gym.Env):
             #     print('*********************************************')
                 # self.sample_map = False
 
-            if self.train_counter % self.log_interval == 0 and self.log_train_info:
+            if self.log_train_info and self.train_counter % self.log_interval == 0:
                 end_time = time.time()
                 duration = end_time - self.start_time
                 avg_reward = self.total_reward_per_log_interval / self.log_interval

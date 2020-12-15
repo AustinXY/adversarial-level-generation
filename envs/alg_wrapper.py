@@ -40,6 +40,18 @@ class ALGDemoWrapper(gym.Wrapper):
         obs, reward, done, info = self.env.step(action)
         return obs, reward, done, info
 
+    def generate_level(self):
+        while True:
+            done = False
+            obs = self.env.reset()
+            while not done:
+                action, _ = self.alg.predict(obs, deterministic=True)
+                obs, _, done, info = self.env.step(action)
+
+            if info['fail_type'] == -1:
+                return obs
+
+
     def generate_episode_gif(self):
         attempt = 0
         while True:
