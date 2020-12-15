@@ -368,7 +368,8 @@ class ALGEnv(gym.Env):
                 print('Good Map                  :', self.train_result_summary[0])
                 if self.alg_version == 2:
                     print('Too easy map              :', self.train_result_summary[1])
-                print('Too hard or unsolvable map:', self.train_result_summary[2])
+                if self.alg_version != 0:
+                    print('Too hard or unsolvable map:', self.train_result_summary[2])
                 print('Not for training map      :', self.train_result_summary[-1])
 
                 print('Generated wrong number of btp tiles:', self.fail_type_summary[0])
