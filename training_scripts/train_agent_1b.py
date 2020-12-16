@@ -11,7 +11,7 @@ import os.path
 def make_env(rank, seed=0):
     num_boxes = 1
     dim_room = (7, 7)
-    train_mode = 'cnn'
+    train_mode = 'mlp'
     max_steps = 20
 
     """
@@ -32,9 +32,9 @@ def make_env(rank, seed=0):
 
 
 def main():
-    num_cpu = 24
+    num_cpu = 1
     load_version = ''
-    save_version = '1b_7'
+    save_version = '1b_0'
     load_dir = '../demo_checkpoints'
     save_dir = '../models'
     timesteps_per_checkpoint = int(1e6)
@@ -48,7 +48,7 @@ def main():
     soko_env = SubprocVecEnv([make_env(i) for i in range(num_cpu)])
     print('created soko env')
 
-    train_policy = 'CnnPolicy'
+    train_policy = 'MlpPolicy'
     load_path = '{}/agent_v{}.zip'.format(load_dir, load_version)
     if os.path.exists(load_path):
         agent = PPO(train_policy, soko_env, verbose=0)

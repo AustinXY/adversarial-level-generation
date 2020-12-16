@@ -5,7 +5,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 import os
 import os.path
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 # env_li = [lambda: ALGEnv(dim_room=dim_room, num_boxes=num_boxes, train_mode=train_mode, alg_version=alg_version, agent_lb_path=None, agent_ub_path=None)]
 # alg_env = DummyVecEnv(env_li)
@@ -15,7 +15,7 @@ def make_env(rank, seed=0):
     num_boxes = 1
     alg_version = 0
     dim_room = (7, 7)
-    train_mode = 'cnn'
+    train_mode = 'mlp'
     agent_lb_path = None
     agent_ub_path = None
 
@@ -36,11 +36,11 @@ def make_env(rank, seed=0):
     return _init
 
 def main():
-    num_cpu = 24
+    num_cpu = 1
     load_version = ''
     save_version = '1b_v0'
+    load_dir = '../models'
     save_dir = '../models'
-    load_dir = '../demo_checkpoints'
     timesteps_per_checkpoint = int(1e6)
     num_checkpoints = int(1e1)  # controlling performance level of agent
 
@@ -52,7 +52,7 @@ def main():
     alg_env = SubprocVecEnv([make_env(i) for i in range(num_cpu)])
     print('created alg env')
 
-    train_policy = 'CnnPolicy'
+    train_policy = 'MlpPolicy'
     load_path = '{}/alg_v{}.zip'.format(load_dir, load_version)
     if os.path.exists(load_path):
         alg = PPO(train_policy, alg_env, verbose=0)

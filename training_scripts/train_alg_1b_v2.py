@@ -5,7 +5,7 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 import os
 import os.path
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 
 # env_li = [lambda: ALGEnv(dim_room=dim_room, num_boxes=num_boxes, train_mode=train_mode, alg_version=alg_version, agent_lb_path=None, agent_ub_path=None)]
 # alg_env = DummyVecEnv(env_li)
@@ -16,8 +16,8 @@ def make_env(rank, seed=0):
     alg_version = 2
     dim_room = (7, 7)
     train_mode = 'mlp'
-    agent_lb_path = '../demo_checkpoints/agent_v1b_3.zip'
-    agent_ub_path = '../demo_checkpoints/agent_v1b_2.zip'
+    agent_lb_path = '../demo_checkpoints/agent_v1b_0.zip'
+    agent_ub_path = '../demo_checkpoints/agent_v1b_1.zip'
 
     """
     Utility function for multiprocessed env.
@@ -36,11 +36,11 @@ def make_env(rank, seed=0):
     return _init
 
 def main():
-    num_cpu = 9
-    load_version = '1b_v2'
+    num_cpu = 1
+    load_version = '1b_v0'
     save_version = '1b_v2'
+    load_dir = '../models'
     save_dir = '../models'
-    load_dir = '../demo_checkpoints'
     timesteps_per_checkpoint = int(1e6)
     num_checkpoints = int(1e1)  # controlling performance level of agent
 
@@ -54,9 +54,9 @@ def main():
 
     load_path = '{}/alg_v{}.zip'.format(load_dir, load_version)
     if os.path.exists(load_path):
-        alg = PPO("MlpPolicy", alg_env, verbose=0)
-        alg.set_parameters(load_path, exact_match=True)
-        # alg = PPO.load(load_path, env=alg_env)
+        # alg = PPO("MlpPolicy", alg_env, verbose=0)
+        # alg.set_parameters(load_path, exact_match=True)
+        alg = PPO.load(load_path, env=alg_env)
         print('loaded alg checkpoint' + load_path)
     else:
         alg = PPO("MlpPolicy", alg_env, verbose=0)

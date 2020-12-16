@@ -23,8 +23,8 @@ soko_env = DummyVecEnv(env_li)
 print('created soko env')
 
 # agent_li = []
-for version in version_li:
-    agent = PPO("MlpPolicy", soko_env, verbose=0)
+# for version in version_li:
+agent = PPO("MlpPolicy", soko_env, verbose=0)
     # agent = PPO.load('../models/soko_v'+version+'.zip', env=soko_env)
     # print('loaded', version, 'model')
     # agent_li.append(agent)
