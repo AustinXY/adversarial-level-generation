@@ -54,9 +54,9 @@ def main():
 
     load_path = '{}/alg_v{}.zip'.format(load_dir, load_version)
     if os.path.exists(load_path):
-        # alg = PPO("MlpPolicy", alg_env, verbose=0)
-        # alg.set_parameters(load_path, exact_match=True)
-        alg = PPO.load(load_path, env=alg_env)
+        alg = PPO("MlpPolicy", alg_env, verbose=0)
+        alg.set_parameters(load_path, exact_match=True)
+        # alg = PPO.load(load_path, env=alg_env)
         print('loaded alg checkpoint' + load_path)
     else:
         alg = PPO("MlpPolicy", alg_env, verbose=0)
