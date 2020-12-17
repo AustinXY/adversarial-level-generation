@@ -5,7 +5,6 @@ import copy
 import sys
 from copy import deepcopy
 from .sokoban_env import SokobanEnv
-from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3 import PPO
 from .render_utils import room_to_rgb
 import time

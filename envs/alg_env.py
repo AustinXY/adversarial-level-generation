@@ -209,9 +209,6 @@ class ALGEnv(gym.Env):
 
         return reward, train_result
 
-    def good_map_reward(self, attempts):
-        return (self.reward_make_agent_work_max + self.reward_make_agent_work_dec / 2) * attempts
-
     def step(self, action):
         '''
         Tile type:
@@ -293,8 +290,6 @@ class ALGEnv(gym.Env):
 
             if self.is_maxsteps():
                 done = True
-                _train_result = -1
-                _fail_type = 2
 
         # finished generation
         else:
