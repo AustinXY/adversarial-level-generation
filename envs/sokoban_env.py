@@ -6,8 +6,6 @@ from .room_utils import generate_room
 from .render_utils import room_to_rgb, room_to_tiny_world_rgb
 import numpy as np
 import copy
-import sys
-from IPython.display import display, clear_output
 import time
 
 class SokobanEnv(gym.Env):
@@ -71,8 +69,7 @@ class SokobanEnv(gym.Env):
         self.action_space = Discrete(len(ACTION_LOOKUP))
         if train_mode == 'cnn':
             self.scale = 6
-            screen_height, screen_width = (
-                dim_room[0] * self.scale, dim_room[1] * self.scale)
+            screen_height, screen_width = (dim_room[0] * self.scale, dim_room[1] * self.scale)
             self.observation_space = Box(low=0, high=255, shape=(screen_height, screen_width, 3), dtype=np.uint8)
         else:
             self.observation_space = Box(low=0, high=6, shape=(dim_room[0], dim_room[1]), dtype=np.uint8)
