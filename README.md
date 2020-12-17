@@ -31,3 +31,6 @@ demo_checkpoints      contains checkpoints for running the demo.
   |_ alg_v1b_v1.zip   ALG checkpoint, trained for ~1e7 steps
   |_ alg_v1b_v2.zip   ALG checkpoint, trained for ~1e7 steps
 ```
+
+## Acknowledgement
+The codebase is built on top of the gym-sokoban project.
