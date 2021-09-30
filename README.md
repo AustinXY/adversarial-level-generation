@@ -32,5 +32,28 @@ demo_checkpoints      contains checkpoints for running the demo.
   |_ alg_v1b_v2.zip   ALG checkpoint, trained for ~1e7 steps
 ```
 
+## Design
+```
+For n = 1 : 4
+For epoch = 1 : maxEpoch
+Map_is_solvable = False
+While not Map_is_solvable
+Initial_map = all wall tiles
+ALG generate n-box map starting from the initial map
+Using reverse play to check solvability of generated_map
+If generated_map is not solvable
+ALG_reward = some small penalty
+Update ALG
+If generated_map is solvable
+Map_is_solvable = True
+End While
+Train game agent on generated_map
+Update game agent
+Calculate reward for ALG base on game agent’s training process
+Update ALG
+End for
+End for
+```
+
 ## Acknowledgement
 The codebase is built on top of the gym-sokoban project.
